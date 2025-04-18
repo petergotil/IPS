@@ -1,0 +1,4 @@
+/Users/petersmacbook/Desktop/IPS/obj/Debug/net6.0/IPS.fsproj.AssemblyReference.cache
+/Users/petersmacbook/Desktop/IPS/obj/Debug/net6.0/IPS.AssemblyInfoInputs.cache
+/Users/petersmacbook/Desktop/IPS/obj/Debug/net6.0/IPS.AssemblyInfo.fs
+/Users/petersmacbook/Desktop/IPS/obj/Debug/net6.0/IPS.fsproj.CoreCompileInputs.cache
