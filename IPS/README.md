@@ -1,81 +1,90 @@
-# IPS - Compiler Project
+# IPS - Kompilatorprojekt
 
-This is a compiler implementation for the IPS (Implementering af Programmerings Sprog) course at UCPH.
+Dette er en implementering af en kompilator for kurset IPS (Implementering af Programmerings Sprog) på Københavns Universitet.
 
-## Project Structure
+## Projektstruktur
 
 ```
 IPS/
-├── src/                    # Source code
-│   ├── AST/                # Abstract Syntax Tree definitions
-│   ├── Lexer/              # Lexical analysis (tokenization)
-│   ├── Parser/             # Syntax analysis (parsing)
-│   ├── TypeChecker/        # Semantic analysis
-│   ├── CodeGen/            # Code generation (LLVM IR)
-│   ├── Compiler.fs         # Main compiler pipeline
-│   └── Program.fs          # Command-line interface
-├── tests/                  # Test files
-├── examples/               # Example programs
-└── IPS.fsproj              # Project file
+├── src/                    # Kildekode
+│   ├── AST/                # Abstract Syntax Tree definitioner
+│   ├── Lexer/              # Leksikalsk analyse (tokenisering)
+│   ├── Parser/             # Syntaksanalyse (parsing)
+│   ├── TypeChecker/        # Semantisk analyse
+│   ├── CodeGen/            # Kodegenerering (LLVM IR)
+│   ├── Compiler.fs         # Hoved-kompilator pipeline
+│   └── Program.fs          # Kommandolinjegrænsefladen
+├── tests/                  # Testfiler
+├── examples/               # Eksempelprogrammer
+└── IPS.fsproj              # Projektfil
 ```
 
-## Components
+## Komponenter
 
-1. **Lexer**: Transforms source code into tokens
-2. **Parser**: Converts tokens into an Abstract Syntax Tree
-3. **TypeChecker**: Performs semantic analysis on the AST
-4. **CodeGen**: Generates LLVM IR from the AST
-5. **Compiler**: Orchestrates the compilation process and uses clang to compile LLVM IR to machine code
+1. **Lexer**: Transformerer kildekoden til tokens
+2. **Parser**: Konverterer tokens til et Abstract Syntax Tree (AST)
+3. **TypeChecker**: Udfører semantisk analyse på AST'en
+4. **CodeGen**: Genererer LLVM IR fra AST'en
+5. **Compiler**: Styrer kompileringsprocessen og bruger clang til at kompilere LLVM IR til maskinkode
 
-## Building and Running
+## Installation og forudsætninger
 
-### Prerequisites
+### Forudsætninger
 
-- .NET SDK 6.0 or later
-- F# compiler
-- LLVM toolchain (including clang)
+- .NET SDK 6.0 eller nyere
+- F# kompilator
+- LLVM værktøjskæde (inklusive clang)
 
-### Build the Project
+### Trin til installation
+
+1. Klone repositoriet:
+   ```bash
+   git clone https://github.com/petergotil/IPS.git
+   cd IPS
+   ```
+
+2. Byg projektet:
+   ```bash
+   dotnet build
+   ```
+
+## Anvendelse
+
+### Kør kompilatoren
 
 ```bash
-dotnet build
+dotnet run --project IPS.fsproj [muligheder] input-fil
 ```
 
-### Run the Compiler
+### Kommandolinjeparametre
+
+- `-o <fil>`: Angiv output-fil
+- `-v`: Aktivér udførlig output
+- `-h, --help`: Vis hjælpebesked
+
+### Eksempel på anvendelse
 
 ```bash
-dotnet run --project IPS.fsproj [options] input-file
-```
-
-### Options
-
-- `-o <file>`: Specify output file
-- `-v`: Enable verbose output
-- `-h, --help`: Display help message
-
-## Example
-
-```bash
-# Compile a program to an executable
+# Kompilér et program til en eksekverbar fil
 dotnet run --project IPS.fsproj -v examples/test.mylang -o test
 
-# Run the compiled program
+# Kør det kompilerede program
 ./test
 ```
 
-## Language Features
+## Sprogets funktioner
 
-- Variables and assignments
-- Integer, string, and boolean literals
-- Arithmetic and comparison operators
-- Functions with parameters and return values
-- Control flow: if-else, while loops
-- Built-in print function
+- Variabler og tildelinger
+- Heltals-, streng- og boolske litteraler
+- Aritmetiske og sammenligningsoperatorer
+- Funktioner med parametre og returværdier
+- Kontrolstrukturer: if-else, while-løkker
+- Indbygget print-funktion
 
-## Example Program
+## Eksempel på et program
 
 ```
-// A simple program
+// Et simpelt program
 function main() {
   var x = 10;
   var y = 20;
@@ -85,13 +94,37 @@ function main() {
 }
 ```
 
-## Compilation Process
+## Kompileringsprocessen
 
-1. Source code is tokenized by the lexer
-2. Tokens are parsed into an Abstract Syntax Tree
-3. AST is type-checked for semantic correctness
-4. LLVM IR code is generated from the validated AST
-5. LLVM IR is compiled to native machine code using clang
-6. Resulting executable is produced
+1. Kildekoden tokeniseres af lexer'en
+2. Tokens parses til et Abstract Syntax Tree
+3. AST'en typetjekkes for semantisk korrekthed
+4. LLVM IR-kode genereres fra den validerede AST
+5. LLVM IR kompileres til nativ maskinkode ved hjælp af clang
+6. Den resulterende eksekverbare fil produceres
 
-The compiler now produces native executables directly by generating LLVM IR as an intermediate representation and then using the LLVM toolchain to compile it to machine code.
+## Fejlfinding
+
+Hvis du støder på problemer under kompilering, kan du aktivere verbose-tilstand med `-v` flaget, hvilket giver mere detaljeret output om hver fase af kompileringen.
+
+## Udvikling og bidrag
+
+1. Fork repositoriet
+2. Opret en feature branch: `git checkout -b min-nye-feature`
+3. Commit dine ændringer: `git commit -am 'Tilføj en ny feature'`
+4. Push til branchen: `git push origin min-nye-feature`
+5. Indsend en pull request
+
+## Test
+
+For at køre testsuiten:
+
+```bash
+dotnet test
+```
+
+Tests er organiseret for at verificere hver komponent i kompilatoren (lexer, parser, typechecker, osv.).
+
+## Licens
+
+Dette projekt er licenseret under MIT-licensen - se LICENSE-filen for detaljer.
